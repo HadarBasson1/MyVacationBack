@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "web_2",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HadarBasson1/MyVacationBack.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HadarBasson1/MyVacationBack/issues"
+  },
+  "homepage": "https://github.com/HadarBasson1/MyVacationBack#readme",
+  "description": ""
+}
