@@ -1,17 +1,15 @@
-
-const express = require('express');
+const express = require("express");
+const cors = require("cors");
 const app = express();
-const PORT = 3000;
+const PORT=8000
 
-app.get('/', (req, res)=>{
-    res.status(200);
-    res.send("Welcome to root URL of Server");
+app.use(cors());
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.json({ message: "Hello from server!" });
 });
-  
-app.listen(PORT, (error) =>{
-    if(!error)
-        console.log("Server is Successfully Running,and App is listening on port "+ PORT)  
-    else 
-        console.log("Error occurred, server can't start", error);
-    }
-);
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port:` + PORT);
+});
