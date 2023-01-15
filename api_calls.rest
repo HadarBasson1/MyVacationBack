@@ -5,10 +5,15 @@ GET http://localhost:8000/
 ###
 GET http://localhost:8000/flight
 
+
+###
+GET http://localhost:8000/flight/63b7f935ad906ecf281004f2
+
+
 ###
 POST http://localhost:8000/flight
 Content-Type: application/json
 
 {
-"Name":"hadar!! basson"
+"Name":"new flight"
 }
