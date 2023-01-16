@@ -1,4 +1,4 @@
-const Flight=require('../models/flight_model')
+const {Flight}=require('../models/flight_model')
 
 const getFlights= async(req,res)=>{
     try{

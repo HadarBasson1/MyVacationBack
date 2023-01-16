@@ -2,43 +2,27 @@ const mongoose = require("mongoose");
 
 // Flight Modal Schema
 const flightSchema = new mongoose.Schema({
-  Name: {
+  id: {
+    type: String,
+  },
+  name: {
     type: String,
   },
 
-  // URL: {
-  //   type: String,
-  // },
-  // Duration: {
-  //   type: Number,
-  // },
-  // Departure: {
-  //   type: String,
-  // },
-  // Arrivle: {
-  //   type: String,
-  // },
-  // Price: {
-  //   type: Number,
-  //   min: 0,
-  // },
-  // Temperature: {
-  //   type: Number,
-  //   min: 0,
-  // },
-  // Continent: {
-  //   type: String,
+  category: {
+    type: String,
 
-  //   enum: ["asia", "africa", "northAmerica", "southAmerica", "europe"],
-  // },
-  // Date: {
-  //   type: String,
-  //   // required: true,
-  // },
-  // Category: {
-  //   type: String,
-  //   enum: ["urban", "exotic", "nature", "shopping", "sunbathing"],
-  // },
+    enum: ["Asia", "Africa", "North America", "South America", "Europe","Australia"],
+    
+  },
+  image: {
+    type: String,
+  },
+  price: {
+    type: String,
+    min: 0,
+  },
 });
 
-module.exports = mongoose.model("Flight", flightSchema);
+const Flight = mongoose.model("Flight", flightSchema);
+module.exports = {Flight};
