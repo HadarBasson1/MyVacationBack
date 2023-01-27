@@ -12,8 +12,14 @@ const flightSchema = new mongoose.Schema({
   category: {
     type: String,
 
-    enum: ["Asia", "Africa", "North America", "South America", "Europe","Australia"],
-    
+    enum: [
+      "Asia",
+      "Africa",
+      "North America",
+      "South America",
+      "Europe",
+      "Australia",
+    ],
   },
   image: {
     type: String,
@@ -22,7 +28,16 @@ const flightSchema = new mongoose.Schema({
     type: String,
     min: 0,
   },
+
+  dates: {
+    type: [
+      {
+        date: { type: String },
+        price: { type: Number },
+      },
+    ],
+  },
 });
 
 const Flight = mongoose.model("Flight", flightSchema);
-module.exports = {Flight};
+module.exports = { Flight };
