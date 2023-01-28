@@ -12,6 +12,7 @@ const seedFlight = [
     boarding: "08:00 AM",
     landing: "13:00 AM",
     priceTicket: 100,
+    info: "blabla",
   },
   {
     id: 1,
