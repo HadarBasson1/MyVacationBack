@@ -26,16 +26,21 @@ const flightSchema = new mongoose.Schema({
   },
   price: {
     type: String,
-    min: 0,
   },
 
-  dates: {
-    type: [
-      {
-        date: { type: String },
-        price: { type: Number },
-      },
-    ],
+  date: {
+    type: String,
+  },
+
+  boarding: {
+    type: String,
+  },
+
+  landing: {
+    type: String,
+  },
+  priceTicket: {
+    type: Number,
   },
 });
 
