@@ -170,6 +170,11 @@ const seedFlight = [
     landing: "20:00 PM",
     priceTicket: 600,
     info: "There are cities and then there is Bangkok. Temples like Wat Pho are thronged with devotees all day. Street food sizzles all evening. The heat never stops. And the nightlife—from sleazy Patpong to ritzy rooftop bars—is second to none. But the pleasures don’t end there. Night markets, mega malls, and the massive Chatuchak Weekend Market all make Bangkok a shoppers’ (and souvenir-hunter’s) dream. You’ll need to prepare yourself—Bangkok is intense. But for travelers craving local secrets and 24/7 energy, there’s nowhere in the world quite like it.",
+    gallery: [
+      "https://images.unsplash.com/photo-1516815231560-8f41ec531527?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=867&q=80",
+      "https://images.unsplash.com/photo-1540202404-a2f29016b523?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1033&q=80",
+      "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
+    ],
   },
   {
     id: 14,
