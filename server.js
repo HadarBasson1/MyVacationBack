@@ -5,8 +5,32 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const seed = require("./seed");
 mongoose.set("strictQuery", false);
-
 const { User } = require("./models/user_model");
+
+var http = require("http"),
+  server = http.createServer(app),
+  io = require("socket.io")(server);
+server.listen(8000, () => {
+  console.log("APP IS LISTENING ON PORT 8000!");
+});
+
+let usersConnected = 0;
+
+io.on("connection", (socket) => {
+  console.log("user connected");
+  usersConnected += 1;
+  io.emit("users", `${usersConnected}`);
+
+  socket.on("disconnect", () => {
+    console.log("user disconnect");
+    usersConnected -= 1;
+    io.emit("users", `${usersConnected}`);
+  });
+
+  socket.on("message", (message) => {
+    console.log(message);
+  });
+});
 
 const bodyParser = require("body-parser");
 seed.seedDB();
@@ -60,6 +84,6 @@ app.get("/allUsers", async (req, res) => {
   // res.json({ status: 200 });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port:` + PORT);
-});
+// app.listen(PORT, () => {
+//   console.log(`Server is running on port:` + PORT);
+// });
