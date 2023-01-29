@@ -48,6 +48,17 @@ const flightSchema = new mongoose.Schema({
   },
 
   gallery: { type: [String] },
+
+  attractions: [
+    {
+      attraction: {
+        type: String,
+      },
+      url: {
+        type: String,
+      },
+    },
+  ],
 });
 
 const Flight = mongoose.model("Flight", flightSchema);
