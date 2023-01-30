@@ -6,6 +6,7 @@ const cors = require("cors");
 const seed = require("./seed");
 mongoose.set("strictQuery", false);
 const { User } = require("./models/user_model");
+const { Cart } = require("./models/cart_model");
 
 var http = require("http"),
   server = http.createServer(app),
@@ -72,16 +73,45 @@ app.use("/", indexRouter);
 const flightRouter = require("./routes/flight_routes");
 app.use("/flight", flightRouter);
 
-app.post("/addUid", async (req, res) => {
+app.post("/signup", async (req, res) => {
   var user = req.body.user;
+  var email = user.user.email;
   await User.create({ user: user });
-  res.json({ status: 200 });
+  const data = await Cart.create({ Emailuser: email, Items: [] });
+  res.json({ data: data });
 });
 
 app.get("/allUsers", async (req, res) => {
   const users = await User.find({});
   res.json(users);
   // res.json({ status: 200 });
+});
+
+app.post("/addToCart", async (req, res) => {
+  var cartId = req.body.cartId;
+  var itemId = req.body.itemId;
+
+  const cart = await Cart.findById(cartId);
+  var items = cart.Items;
+  var bool = true;
+
+  for (var i = 0; i < items.length; i++) {
+    if (items[i].itemId == itemId) {
+      items[i].amount += 1;
+      bool = false;
+    }
+  }
+  if (bool) {
+    items.push({ itemId: itemId, amount: 1 });
+  }
+  await Cart.findByIdAndUpdate(cartId, { Items: items });
+  res.json({ status: 200 });
+});
+
+app.post("/creatCart", async (req, res) => {
+  var Emailuser = req.body.Emailuser;
+  var id = await Cart.create({ Emailuser: Emailuser, Items: [] });
+  res.json({ id: id });
 });
 
 // app.listen(PORT, () => {
