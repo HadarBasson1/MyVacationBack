@@ -9,6 +9,9 @@ GET http://localhost:8000/flight
 ###
 GET http://localhost:8000/flight/63d3c8c52d3a3d5862c3a24b
 
+###
+DELETE  http://localhost:8000/flight/deleteFlight/63e56b0204bedd56be5661ba
+
 
 ###
 POST http://localhost:8000/flight

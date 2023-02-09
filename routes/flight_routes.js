@@ -1,16 +1,18 @@
 const express = require("express");
-const router=express.Router();
-const Flight=require('../controllers/flights')
+const router = express.Router();
+const Flight = require("../controllers/flights");
 
 /**
-* @swagger
-* tags:
-* name: Auth
-* description: The Authentication API
-*/
+ * @swagger
+ * tags:
+ * name: Auth
+ * description: The Authentication API
+ */
 
-router.get('/',Flight.getFlights)
-router.get('/:id',Flight.getFlightById)
-router.post('/',Flight.addFlight)
+router.get("/", Flight.getFlights);
+router.get("/:id", Flight.getFlightById);
+router.post("/", Flight.addFlight);
+router.delete("/deleteFlight/:id", Flight.deleteFlightById);
+//deleteFlightById
 
-module.exports = router
+module.exports = router;
