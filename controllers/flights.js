@@ -49,10 +49,34 @@ const deleteFlightById = async (req, res) => {
 };
 
 const addFlight = async (req, res) => {
-  console.log(req.body.Name);
+  //   console.log(req.body.Name);
+  var gallery = [
+    req.body.gallery_1,
+    req.body.gallery_2,
+    req.body.gallery_3,
+    req.body.gallery_4,
+  ];
 
-  const flight = Flight({
-    Name: req.body.Name,
+  var attractions = [
+    { attraction: req.body.attraction_1_name, url: req.body.attraction_1_url },
+    { attraction: req.body.attraction_2_name, url: req.body.attraction_2_url },
+    { attraction: req.body.attraction_3_name, url: req.body.attraction_3_url },
+    { attraction: req.body.attraction_4_name, url: req.body.attraction_4_url },
+    { attraction: req.body.attraction_5_name, url: req.body.attraction_5_url },
+  ];
+  var flight = Flight({
+    id: "23",
+    name: req.body.name,
+    category: req.body.continent,
+    image: req.body.image,
+    price: req.body.price,
+    date: req.body.date,
+    boarding: req.body.boarding,
+    landing: req.body.landing,
+    priceTicket: req.body.priceTicket,
+    info: req.body.info,
+    gallery: gallery,
+    attractions: attractions,
   });
 
   flight.save((error, newFlight) => {

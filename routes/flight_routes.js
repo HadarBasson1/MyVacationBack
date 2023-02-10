@@ -11,7 +11,7 @@ const Flight = require("../controllers/flights");
 
 router.get("/", Flight.getFlights);
 router.get("/:id", Flight.getFlightById);
-router.post("/", Flight.addFlight);
+router.post("/addFlight", Flight.addFlight);
 router.delete("/deleteFlight/:id", Flight.deleteFlightById);
 //deleteFlightById
 
