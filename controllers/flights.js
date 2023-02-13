@@ -19,6 +19,7 @@ const getFlightById = async (req, res) => {
       message: err.message,
     });
   }
+
   try {
     flight = await Flight.findById(req.params.id);
     res.status(200).send(flight);
@@ -94,9 +95,64 @@ const addFlight = async (req, res) => {
   });
 };
 
+const updateFlight = async (req, res) => {
+  _id = req.body._id;
+  //   console.log(req.body.Name);
+  var gallery = [
+    req.body.gallery_1,
+    req.body.gallery_2,
+    req.body.gallery_3,
+    req.body.gallery_4,
+  ];
+
+  var attractions = [
+    { attraction: req.body.attraction_1_name, url: req.body.attraction_1_url },
+    { attraction: req.body.attraction_2_name, url: req.body.attraction_2_url },
+    { attraction: req.body.attraction_3_name, url: req.body.attraction_3_url },
+    { attraction: req.body.attraction_4_name, url: req.body.attraction_4_url },
+    { attraction: req.body.attraction_5_name, url: req.body.attraction_5_url },
+  ];
+  // var flight = Flight({
+  //   name: req.body.name,
+  //   category: req.body.continent,
+  //   image: req.body.image,
+  //   price: req.body.price,
+  //   date: req.body.date,
+  //   boarding: req.body.boarding,
+  //   landing: req.body.landing,
+  //   priceTicket: req.body.priceTicket,
+  //   info: req.body.info,
+  //   gallery: gallery,
+  //   attractions: attractions,
+  // });
+
+  try {
+    var flight = await Flight.findByIdAndUpdate(req.body._id, {
+      name: req.body.name,
+      category: req.body.continent,
+      image: req.body.image,
+      price: req.body.price,
+      date: req.body.date,
+      boarding: req.body.boarding,
+      landing: req.body.landing,
+      priceTicket: req.body.priceTicket,
+      info: req.body.info,
+      gallery: gallery,
+      attractions: attractions,
+    });
+    res.status(200).send(flight);
+  } catch (err) {
+    res.status(400).send({
+      status: "fail",
+      message: err.message,
+    });
+  }
+};
+
 module.exports = {
   getFlights,
   addFlight,
   getFlightById,
   deleteFlightById,
+  updateFlight,
 };
