@@ -15,6 +15,8 @@ server.listen(8000, () => {
   console.log("APP IS LISTENING ON PORT 8000!");
 });
 
+// Asia,Africa,North America,South America,Europe,Australia"
+var Sales_by_continent = [0, 0, 0, 0, 0, 0];
 let usersConnected = 0;
 
 io.on("connection", (socket) => {
@@ -81,9 +83,46 @@ app.post("/signup", async (req, res) => {
   res.json({ data: data });
 });
 
+app.post("/updateSales", async (req, res) => {
+  var sales = req.body;
+  for (var i = 0; i < sales.length; i++) {
+    switch (sales[i].continent) {
+      case "Asia":
+        Sales_by_continent[0] += parseInt(sales[i].q);
+        break;
+      case "Africa":
+        Sales_by_continent[1] += parseInt(sales[i].q);
+        break;
+      case "North America":
+        Sales_by_continent[2] += parseInt(sales[i].q);
+        break;
+      case "South America":
+        Sales_by_continent[3] += parseInt(sales[i].q);
+        break;
+      case "Europe":
+        Sales_by_continent[4] += parseInt(sales[i].q);
+        break;
+      case "Australia":
+        Sales_by_continent[5] += parseInt(sales[i].q);
+        break;
+
+      default:
+        break;
+    }
+  }
+  // console.log(JSON.stringify(sales));
+  console.log(Sales_by_continent);
+  res.json({ status: 200 });
+});
+
 app.get("/allUsers", async (req, res) => {
   const users = await User.find({});
   res.json(users);
+  // res.json({ status: 200 });
+});
+
+app.get("/allSales", async (req, res) => {
+  res.json(Sales_by_continent);
   // res.json({ status: 200 });
 });
 
