@@ -5,16 +5,8 @@ const CartSchema = new mongoose.Schema({
   Emailuser: {
     type: String,
   },
-  Items: [
-    {
-      itemId: {
-        type: String,
-      },
-      amount: {
-        type: Number,
-      },
-    },
-  ],
+  CartItems: { type: Object },
+  Total: { type: Number },
 });
 
 const Cart = mongoose.model("Cart", CartSchema);

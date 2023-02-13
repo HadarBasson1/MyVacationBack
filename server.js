@@ -79,8 +79,34 @@ app.post("/signup", async (req, res) => {
   var user = req.body.user;
   var email = user.user.email;
   await User.create({ user: user });
-  const data = await Cart.create({ Emailuser: email, Items: [] });
-  res.json({ data: data });
+  const cart = await Cart.create({
+    Emailuser: email,
+    CartItems: null,
+    Total: 0,
+  });
+  res.json({ id: cart._id });
+});
+
+app.post("/logout", async (req, res) => {
+  var cartId = req.body.cartId;
+  var cartItems = req.body.cartItems;
+  var total = req.body.total;
+  await Cart.findByIdAndUpdate(cartId, { CartItems: cartItems, Total: total });
+  res.json({ status: 200 });
+});
+
+app.post("/login", async (req, res) => {
+  var email = req.body.email;
+  carts = await Cart.find({});
+  for (var i = 0; i < carts.length; i++) {
+    if (carts[i].Emailuser === email) {
+      res.json({
+        id: carts[i]._id,
+        cart: carts[i].CartItems,
+        total: carts[i].Total,
+      });
+    }
+  }
 });
 
 app.post("/updateSales", async (req, res) => {
