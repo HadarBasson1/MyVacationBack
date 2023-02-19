@@ -5,6 +5,9 @@ const userSchema = new mongoose.Schema({
   user: {
     type: Object,
   },
+  total: {
+    type: Number,
+  },
 });
 
 const User = mongoose.model("User", userSchema);

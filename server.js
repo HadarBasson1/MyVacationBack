@@ -78,7 +78,7 @@ app.use("/flight", flightRouter);
 app.post("/signup", async (req, res) => {
   var user = req.body.user;
   var email = user.user.email;
-  await User.create({ user: user });
+  await User.create({ user: user, total: 0 });
   const cart = await Cart.create({
     Emailuser: email,
     CartItems: null,
@@ -100,17 +100,21 @@ app.post("/login", async (req, res) => {
   carts = await Cart.find({});
   for (var i = 0; i < carts.length; i++) {
     if (carts[i].Emailuser === email) {
-      res.json({
+      res.send({
         id: carts[i]._id,
         cart: carts[i].CartItems,
         total: carts[i].Total,
       });
+      return;
     }
   }
 });
 
 app.post("/updateSales", async (req, res) => {
-  var sales = req.body;
+  var sales = req.body.sales;
+  var email = req.body.email;
+  var total = req.body.total;
+
   for (var i = 0; i < sales.length; i++) {
     switch (sales[i].continent) {
       case "Asia":
@@ -136,6 +140,17 @@ app.post("/updateSales", async (req, res) => {
         break;
     }
   }
+
+  const users = await User.find({});
+
+  for (var j = 0; j < users.length; j++) {
+    if (users[j].user.user.email === email) {
+      await User.findByIdAndUpdate(users[j]._id, {
+        total: parseInt(users[j].total) + parseInt(total),
+      });
+    }
+  }
+
   // console.log(JSON.stringify(sales));
   console.log(Sales_by_continent);
   res.json({ status: 200 });
