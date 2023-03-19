@@ -7,6 +7,7 @@ const seed = require("./seed");
 mongoose.set("strictQuery", false);
 const { User } = require("./models/user_model");
 const { Cart } = require("./models/cart_model");
+const { Order } = require("./models/order_model");
 
 var http = require("http"),
   server = http.createServer(app),
@@ -191,6 +192,24 @@ app.post("/addToCart", async (req, res) => {
 app.post("/creatCart", async (req, res) => {
   var Emailuser = req.body.Emailuser;
   var id = await Cart.create({ Emailuser: Emailuser, Items: [] });
+  res.json({ id: id });
+});
+
+app.post("/creatOrder", async (req, res) => {
+  var FirstName = req.body.FirstName;
+  var LastName = req.body.LastName;
+  var Address = req.body.Address;
+  var Phone = req.body.Phone;
+  var Total = req.body.Total;
+  var Date_Order = new Date();
+  var id = await Order.create({
+    FirstName: FirstName,
+    LastName: LastName,
+    Address: Address,
+    Phone: Phone,
+    Total: Total,
+    Date: Date_Order,
+  });
   res.json({ id: id });
 });
 
