@@ -76,6 +76,15 @@ app.use("/", indexRouter);
 const flightRouter = require("./routes/flight_routes");
 app.use("/flight", flightRouter);
 
+const cartRouter = require("./routes/cart_routes");
+app.use("/cart", cartRouter);
+
+const userRouter = require("./routes/user_routes");
+app.use("/user", userRouter);
+
+const orderRouter = require("./routes/order_routes");
+app.use("/order", orderRouter);
+
 app.post("/signup", async (req, res) => {
   var user = req.body.user;
   var email = user.user.email;
@@ -152,73 +161,12 @@ app.post("/updateSales", async (req, res) => {
     }
   }
 
+  app.get("/allSales", async (req, res) => {
+    res.json(Sales_by_continent);
+    // res.json({ status: 200 });
+  });
+
   // console.log(JSON.stringify(sales));
   console.log(Sales_by_continent);
   res.json({ status: 200 });
 });
-
-app.get("/allUsers", async (req, res) => {
-  const users = await User.find({});
-  res.json(users);
-  // res.json({ status: 200 });
-});
-
-app.get("/allSales", async (req, res) => {
-  res.json(Sales_by_continent);
-  // res.json({ status: 200 });
-});
-
-app.post("/addToCart", async (req, res) => {
-  var cartId = req.body.cartId;
-  var itemId = req.body.itemId;
-
-  const cart = await Cart.findById(cartId);
-  var items = cart.Items;
-  var bool = true;
-
-  for (var i = 0; i < items.length; i++) {
-    if (items[i].itemId == itemId) {
-      items[i].amount += 1;
-      bool = false;
-    }
-  }
-  if (bool) {
-    items.push({ itemId: itemId, amount: 1 });
-  }
-  await Cart.findByIdAndUpdate(cartId, { Items: items });
-  res.json({ status: 200 });
-});
-
-app.post("/creatCart", async (req, res) => {
-  var Emailuser = req.body.Emailuser;
-  var id = await Cart.create({ Emailuser: Emailuser, Items: [] });
-  res.json({ id: id });
-});
-
-app.post("/creatOrder", async (req, res) => {
-  var FirstName = req.body.FirstName;
-  var LastName = req.body.LastName;
-  var Address = req.body.Address;
-  var Phone = req.body.Phone;
-  var Total = req.body.Total;
-  var Date_Order = new Date();
-  var id = await Order.create({
-    FirstName: FirstName,
-    LastName: LastName,
-    Address: Address,
-    Phone: Phone,
-    Total: Total,
-    Date: Date_Order,
-  });
-  res.json({ id: id });
-});
-
-app.get("/allOrders", async (req, res) => {
-  const orders = await Order.find({});
-  res.json(orders);
-  // res.json({ status: 200 });
-});
-
-// app.listen(PORT, () => {
-//   console.log(`Server is running on port:` + PORT);
-// });
