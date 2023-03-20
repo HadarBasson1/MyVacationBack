@@ -213,6 +213,12 @@ app.post("/creatOrder", async (req, res) => {
   res.json({ id: id });
 });
 
+app.get("/allOrders", async (req, res) => {
+  const orders = await Order.find({});
+  res.json(orders);
+  // res.json({ status: 200 });
+});
+
 // app.listen(PORT, () => {
 //   console.log(`Server is running on port:` + PORT);
 // });
